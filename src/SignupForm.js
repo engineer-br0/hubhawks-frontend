@@ -15,7 +15,7 @@ const Signup =() => {
     }
     else setMessage("sigining up ...")
     try{
-    const res = await axios.post("http://localhost:4000/signup",{
+    const res = await axios.post("https://hubhawks-backend.onrender.com/signup",{
         username,
         password
     });
