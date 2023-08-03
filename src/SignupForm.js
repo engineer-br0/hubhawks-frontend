@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Signup.css'
+import { Link } from 'react-router-dom';
 
 const Signup =() => {
   const [username, setUsername] = useState('');
@@ -23,6 +24,9 @@ const Signup =() => {
        </div>
       <button className="btn btn-primary" onClick={handleSignup}>Sign Up</button>
       <p className="message">{message}</p>
+      <div className="signup-link">
+        <p>Already registered? <Link style={{textDecoration:"none"}} to="/"> Login </Link>  now!</p>
+      </div>
       </div>
   );
 };
