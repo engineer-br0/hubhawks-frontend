@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Signup.css'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Signup =() => {
   const [username, setUsername] = useState('');
@@ -8,7 +9,21 @@ const Signup =() => {
   const [message, setMessage] = useState('');
 
   const handleSignup = async () => {
-    
+    if(!username || !password){
+        setMessage("fill all the fields!");
+        return;
+    }
+    else setMessage("sigining up ...")
+    try{
+    const res = await axios.post("http://localhost:4000/signup",{
+        username,
+        password
+    });
+    setMessage(res.data.message)
+    }
+    catch(err){
+        setMessage("error occured!")
+    }
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Signin.css';
 import {Link, useNavigate} from "react-router-dom"
-import Signup from './SignupForm';
+import axios from 'axios';
 
 const Signin = () => {
     //const navigate = useNavigate();
@@ -10,7 +10,22 @@ const Signin = () => {
   const [message, setMessage] = useState('');
 
   const handleSignin = async () => {
-    
+    if(!username || !password){
+        setMessage("fill all the details!");
+        return;
+    }
+    else setMessage("signing in ...")
+    try{
+        const res = await axios.post("http://localhost:4000/signin", {
+            username, password
+        });
+        console.log(res.data.message)
+        setMessage(res.data.message)
+    }
+    catch(err){
+        console.log(err)
+        setMessage("error occured!")
+    }
   };
 
   return (
@@ -28,7 +43,6 @@ const Signin = () => {
       <p className="message">{message}</p>
       <div className="signup-link">
         <p>Not registered? <Link style={{textDecoration:"none"}} to="/signup"> Sign up </Link>  now!</p>
-        
       </div>
     </div>
   );
